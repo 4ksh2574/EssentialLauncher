@@ -1128,8 +1128,6 @@ patch(
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDimEnabled">true</item>
-        <item name="android:windowDimAmount">0.14</item>
         <item name="android:forceDarkAllowed" tools:ignore="NewApi">false</item>
     </style>
 </resources>
