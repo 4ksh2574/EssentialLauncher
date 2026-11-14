@@ -8,6 +8,8 @@ required copyright/licence notices remain unchanged.
 from __future__ import annotations
 
 import os
+import base64
+from PIL import Image
 import re
 import sys
 from pathlib import Path
@@ -36,6 +38,40 @@ def replace_once(text: str, pattern: str, replacement: str, label: str) -> str:
         )
     return updated
 
+
+
+def generate_brand_assets() -> None:
+    """Generate launcher icons from the AXo orbit emblem for all Android densities."""
+    source = ROOT / "branding" / "axo-orbit.webp"
+    with Image.open(source) as image:
+        image = image.convert("RGBA")
+        root_res = UPSTREAM / "res"
+        lawn_res = UPSTREAM / "lawnchair" / "res"
+        densities = {
+            "mdpi": (108, 48),
+            "hdpi": (162, 72),
+            "xhdpi": (216, 96),
+            "xxhdpi": (324, 144),
+            "xxxhdpi": (432, 192),
+        }
+        for density, (adaptive_size, legacy_size) in densities.items():
+            mipmap = root_res / f"mipmap-{density}"
+            mipmap.mkdir(parents=True, exist_ok=True)
+            adaptive = image.resize((adaptive_size, adaptive_size), Image.Resampling.LANCZOS)
+            adaptive.save(mipmap / "ic_launcher_home_foreground.png", optimize=True)
+            Image.new("RGBA", (adaptive_size, adaptive_size), (0, 0, 0, 255)).save(
+                mipmap / "ic_launcher_home_background.png", optimize=True
+            )
+            legacy = image.resize((legacy_size, legacy_size), Image.Resampling.LANCZOS)
+            legacy.save(mipmap / "ic_launcher_home.png", optimize=True)
+            legacy.save(mipmap / "ic_launcher_home_round.png", optimize=True)
+        image.resize((512, 512), Image.Resampling.LANCZOS).save(
+            UPSTREAM / "ic_launcher_home-playstore.png", optimize=True
+        )
+        image.resize((512, 512), Image.Resampling.LANCZOS).save(
+            lawn_res / "drawable" / "ic_launcher_home_comp.png", optimize=True
+        )
+    print("Generated AXo orbit launcher icons for all Android densities")
 
 def main() -> int:
     if not (UPSTREAM / "build.gradle").is_file():
@@ -151,6 +187,7 @@ def main() -> int:
             file_path.write_text(updated, encoding="utf-8")
             replaced_files += 1
 
+    generate_brand_assets()
     print(f"Prepared {app_name} {version} ({application_id})")
     print(f"Updated launcher build config and {replaced_files} translated string files")
     return 0
