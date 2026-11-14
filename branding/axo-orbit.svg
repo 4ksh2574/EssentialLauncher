@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <defs>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16d6c7"/>
+      <stop offset="1" stop-color="#078f9e"/>
+    </linearGradient>
+    <linearGradient id="graphite" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#26343d"/>
+      <stop offset="1" stop-color="#111b24"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M294 755 C218 652 208 516 254 397 C304 269 414 190 551 180" stroke="url(#teal)" stroke-width="47"/>
+    <path d="M600 181 C624 193 630 224 613 247" stroke="url(#teal)" stroke-width="24"/>
+    <path d="M350 724 C280 625 277 496 327 395 C379 290 483 244 586 270 C645 285 688 326 714 382" stroke="url(#graphite)" stroke-width="23"/>
+    <path d="M704 518 C697 646 616 746 502 760 C461 765 421 759 385 743" stroke="url(#graphite)" stroke-width="22"/>
+    <path d="M408 824 C535 900 688 875 784 780 C840 724 865 648 865 565" stroke="url(#teal)" stroke-width="46"/>
+    <path d="M117 852 C257 825 407 766 548 677 C686 590 813 484 852 365 C867 318 851 275 813 254 C778 235 736 242 704 261" stroke="url(#graphite)" stroke-width="70"/>
+    <path d="M117 852 L179 773 C157 826 183 850 231 852" stroke="url(#graphite)" stroke-width="39"/>
+    <path d="M117 852 L165 824" stroke="#07131b" stroke-width="8"/>
+    <path d="M580 674 C584 710 602 735 628 750" stroke="url(#graphite)" stroke-width="27"/>
+    <path d="M612 648 C680 604 738 557 791 501" stroke="url(#graphite)" stroke-width="12"/>
+  </g>
+  <g fill="#26343d">
+    <rect x="846" y="113" width="34" height="34"/>
+    <rect x="846" y="183" width="34" height="34"/>
+    <rect x="811" y="148" width="34" height="34"/>
+    <rect x="881" y="148" width="34" height="34"/>
+  </g>
+</svg>
