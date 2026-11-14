@@ -35,6 +35,9 @@ jobs:
       - name: Apply Essential Launcher identity
         run: python3 scripts/prepare_launcher.py
 
+      - name: Prepare notification shade and controls
+        run: python3 scripts/prepare_notification_controls.py
+
       - name: Build release APK
         run: ./gradlew assembleLawnWithQuickstepGithubRelease
         working-directory: launcher-core
