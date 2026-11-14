@@ -8,7 +8,8 @@ required copyright/licence notices remain unchanged.
 from __future__ import annotations
 
 import os
-import base64
+import io
+import cairosvg
 from PIL import Image
 import re
 import sys
@@ -42,11 +43,13 @@ def replace_once(text: str, pattern: str, replacement: str, label: str) -> str:
 
 def generate_brand_assets() -> None:
     """Generate launcher icons from the AXo orbit emblem for all Android densities."""
-    source = ROOT / "branding" / "axo-orbit.webp"
-    with Image.open(source) as image:
+    source = ROOT / "branding" / "axo-orbit.svg"
+    png_bytes = cairosvg.svg2png(url=str(source), output_width=1024, output_height=1024)
+    with Image.open(io.BytesIO(png_bytes)) as image:
         image = image.convert("RGBA")
         root_res = UPSTREAM / "res"
         lawn_res = UPSTREAM / "lawnchair" / "res"
+        (lawn_res / "drawable").mkdir(parents=True, exist_ok=True)
         densities = {
             "mdpi": (108, 48),
             "hdpi": (162, 72),
